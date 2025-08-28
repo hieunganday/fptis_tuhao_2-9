@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)https://hieunganday.github.io/avatar_fptis_30.4.2025/ -->
+<html lang="vi"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>TỰ HÀO 80 NĂM QUỐC KHÁNH VIỆT NAM (2/9/1945 – 2/9/2025) - FPT IS</title>
+  <style>
+    :root {
+      --primary-color: #ff7f00;
+      --secondary-color: #007bff;
+      --background-color: #f9f9f9;
+      --text-color: #333;
+      --border-radius: 8px;
+      --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    body {
+      text-align: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--background-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    h1 {
+      color: var(--primary-color);
+      margin-bottom: 30px;
+      font-size: 2.5rem;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .canvas-container {
+      position: relative;
+      display: inline-block;
+      margin: 20px 0;
+      box-shadow: var(--shadow);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+    }
+    
+    #canvas {
+      display: block;
+      background-color: #fff;
+      touch-action: none;
+    }
+    
+    .controls {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      margin: 20px 0;
+    }
+    
+    .slider-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .slider-container label {
+      margin-right: 10px;
+      min-width: 80px;
+      text-align: right;
+      font-weight: bold;
+    }
+    
+    #rotateSlider {
+      flex: 1;
+      height: 5px;
+      -webkit-appearance: none;
+      appearance: none;
+      background: #ddd;
+      outline: none;
+      border-radius: 5px;
+    }
+    
+    #rotateSlider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--primary-color);
+      cursor: pointer;
+    }
+    
+    #rotateValue {
+      margin-left: 10px;
+      min-width: 40px;
+    }
+    
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 25px;
+    }
+    
+    button {
+      padding: 12px 25px;
+      border: none;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: var(--border-radius);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+    
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    #upload {
+      background-color: var(--primary-color);
+    }
+    
+    #download {
+      background-color: var(--secondary-color);
+    }
+    
+    .icon {
+      margin-right: 8px;
+    }
+    
+    #result {
+      margin-top: 30px;
+    }
+    
+    #result img {
+      max-width: 300px;
+      height: auto;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+    }
+    
+    #result img:hover {
+      transform: scale(1.03);
+    }
+    
+    #instruction {
+      font-size: 14px;
+      color: #666;
+      margin-top: 10px;
+      background-color: #e9f5ff;
+      padding: 10px;
+      border-radius: var(--border-radius);
+      display: inline-block;
+    }
+    
+    .instructions-block {
+      background-color: #fff;
+      padding: 15px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      margin: 20px 0;
+      text-align: left;
+    }
+    
+    .instructions-block h3 {
+      color: var(--primary-color);
+      margin-top: 0;
+    }
+    
+    .instructions-block ul {
+      padding-left: 20px;
+    }
+    
+    footer {
+      margin-top: 40px;
+      font-size: 0.9rem;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>
+    <span style="color: #ff7f00;">TỰ HÀO</span> 
+    <span style="color: #333;">80 NĂM QUỐC KHÁNH VIỆT NAM</span> 
+    <span style="color: #007bff;">(2/9/1945 – 2/9/2025)</span>
+  </h1>
+<div class="canvas-container">
+  <canvas id="canvas" width="800" height="800"></canvas>
+  </div>
+  
+  
+  <div class="controls">
+    <div class="slider-container">
+      <label for="rotateSlider">Xoay ảnh:</label>
+      <input type="range" id="rotateSlider" min="0" max="360" value="0">
+      <span id="rotateValue">0°</span>
+    </div>
+
+    <div class="buttons">
+      <label for="fileInput">
+        <button id="upload"><span class="icon">📷</span>Chọn ảnh</button>
+      </label>
+      <button id="download"><span class="icon">💾</span>Tải Avatar</button>
+      <input type="file" id="fileInput" accept="image/*" style="display: none;">
+    </div>
+  </div>
+  
+    <div class="instructions-block">
+    <h3>Hướng dẫn sử dụng:</h3>
+    <ul>
+      <li>Nhấn <strong>Chọn ảnh</strong> để tải ảnh của bạn lên</li>
+      <li>Kéo thả ảnh để di chuyển vị trí</li>
+      <li>Cuộn chuột để phóng to/nhỏ ảnh</li>
+      <li>Sử dụng thanh trượt để xoay ảnh</li>
+      <li>Với thiết bị di động, dùng 2 ngón tay để phóng to/nhỏ</li>
+      <li>Khi hài lòng, nhấn <strong>Tải Avatar</strong> để lưu ảnh</li>
+    </ul>
+  </div>
+
+  <div id="result"></div>
+  <div id="instruction"></div>
+
+  <footer>
+    &copy; 2025 FPT IS
+  </footer>
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const rotateSlider = document.getElementById('rotateSlider');
+    const fileInput = document.getElementById('fileInput');
+    const uploadBtn = document.getElementById('upload');
+    const downloadBtn = document.getElementById('download');
+    const resultDiv = document.getElementById('result');
+    const instructionDiv = document.getElementById('instruction');
+
+    let frame = new Image();
+    frame.src = 'mau2.png';
+
+    let uploadedImage = null;
+    let scale = 1;
+    let rotation = 0;
+    let posX = canvas.width / 2;
+    let posY = canvas.height / 2;
+    let isDragging = false;
+    let startX, startY;
+    let lastTouchDistance = null;
+
+    fileInput.addEventListener('change', function(e) {
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        uploadedImage = new Image();
+        uploadedImage.onload = function() {
+          draw();
+        }
+        uploadedImage.src = event.target.result;
+      }
+      reader.readAsDataURL(e.target.files[0]);
+    });
+
+    uploadBtn.addEventListener('click', () => {
+      fileInput.click();
+    });
+
+    downloadBtn.addEventListener('click', function() {
+      const dataUrl = canvas.toDataURL('image/png');
+
+      // Hiển thị ảnh kết quả ngay dưới
+      resultDiv.innerHTML = `<img src="${dataUrl}" alt="Avatar">`;
+      instructionDiv.innerHTML = "📱 Nhấn giữ vào ảnh trên để lưu vào Album Ảnh";
+
+      // Scroll xuống kết quả cho dễ thấy
+      resultDiv.scrollIntoView({ behavior: 'smooth' });
+    });
+
+    rotateSlider.addEventListener('input', function() {
+      rotation = parseInt(this.value);
+      draw();
+    });
+
+    canvas.addEventListener('mousedown', function(e) {
+      isDragging = true;
+      startX = e.offsetX;
+      startY = e.offsetY;
+    });
+
+    canvas.addEventListener('mousemove', function(e) {
+      if (isDragging) {
+        const dx = e.offsetX - startX;
+        const dy = e.offsetY - startY;
+        posX += dx;
+        posY += dy;
+        startX = e.offsetX;
+        startY = e.offsetY;
+        draw();
+      }
+    });
+
+    canvas.addEventListener('mouseup', function() {
+      isDragging = false;
+    });
+
+    canvas.addEventListener('wheel', function(e) {
+      e.preventDefault();
+      if (e.deltaY < 0) {
+        scale *= 1.05;
+      } else {
+        scale /= 1.05;
+      }
+      draw();
+    });
+
+    canvas.addEventListener('touchstart', function(e) {
+      if (e.touches.length === 1) {
+        isDragging = true;
+        startX = e.touches[0].clientX - canvas.getBoundingClientRect().left;
+        startY = e.touches[0].clientY - canvas.getBoundingClientRect().top;
+      }
+      if (e.touches.length === 2) {
+        lastTouchDistance = getTouchDistance(e.touches);
+      }
+    });
+
+    canvas.addEventListener('touchmove', function(e) {
+      e.preventDefault();
+      if (e.touches.length === 1 && isDragging) {
+        const moveX = e.touches[0].clientX - canvas.getBoundingClientRect().left;
+        const moveY = e.touches[0].clientY - canvas.getBoundingClientRect().top;
+        const dx = moveX - startX;
+        const dy = moveY - startY;
+        posX += dx;
+        posY += dy;
+        startX = moveX;
+        startY = moveY;
+        draw();
+      }
+      if (e.touches.length === 2) {
+        const newDistance = getTouchDistance(e.touches);
+        if (lastTouchDistance) {
+          if (newDistance > lastTouchDistance) {
+            scale *= 1.02;
+          } else {
+            scale /= 1.02;
+          }
+          draw();
+        }
+        lastTouchDistance = newDistance;
+      }
+    });
+
+    canvas.addEventListener('touchend', function(e) {
+      if (e.touches.length < 2) {
+        lastTouchDistance = null;
+      }
+      if (e.touches.length === 0) {
+        isDragging = false;
+      }
+    });
+
+    function getTouchDistance(touches) {
+      const dx = touches[0].clientX - touches[1].clientX;
+      const dy = touches[0].clientY - touches[1].clientY;
+      return Math.sqrt(dx * dx + dy * dy);
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (uploadedImage) {
+        ctx.save();
+        ctx.translate(posX, posY);
+        ctx.rotate(rotation * Math.PI / 180);
+        ctx.scale(scale, scale);
+        ctx.drawImage(uploadedImage, -uploadedImage.width / 2, -uploadedImage.height / 2);
+        ctx.restore();
+      }
+      ctx.drawImage(frame, 0, 0, canvas.width, canvas.height);
+    }
+	    // Initialize with the frame visible
+    window.onload = function() {
+      // Đảm bảo vẽ canvas ngay khi trang load xong, bất kể trạng thái của frame
+      draw();
+      
+      // Hiển thị hướng dẫn sử dụng từ đầu
+      instructionDiv.innerHTML = "👆 Hãy tải ảnh của bạn lên và chỉnh sửa vị trí để tạo avatar";
+    };
+  </script>
+
+
+</body></html>
